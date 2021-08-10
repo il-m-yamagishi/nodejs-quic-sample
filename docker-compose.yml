@@ -1,0 +1,24 @@
+version: '3'
+services:
+    node:
+        build: .
+        ports:
+            - '1234:1234/udp'
+        volumes:
+            - '.:/home/node/app'
+        networks:
+            - nodejs
+        working_dir: /home/node/app
+        command: node sample2-server.js
+    node-client:
+        build: .
+        ports:
+            - '12345:12345/udp'
+        volumes:
+            - '.:/home/node/app'
+        networks:
+            - nodejs
+        working_dir: /home/node/app
+        command: node sample3-client.js
+networks:
+    nodejs: {}

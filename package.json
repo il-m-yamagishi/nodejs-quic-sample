@@ -1,0 +1,10 @@
+{
+  "name": "nodejs-quic-sample",
+  "version": "0.0.1",
+  "description": "node.js quic sample",
+  "main": "index.js",
+  "author": "Masaru Yamagishi <m-yamagishi@infiniteloop.co.jp>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {}
+}
