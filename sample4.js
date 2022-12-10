@@ -6,9 +6,9 @@ const { createQuicSocket } = require('net');
 const { readFileSync } = require('fs');
 const { debuglog } = require('util');
 const { assert } = require('console');
-const log = debuglog('COMMON');
-const clientLog = debuglog('CLIENT');
-const serverLog = debuglog('SERVER');
+const log = debuglog('QUIC:COMMON');
+const clientLog = debuglog('QUIC:CLIENT');
+const serverLog = debuglog('QUIC:SERVER');
 
 const key = readFileSync(__dirname + '/server.key');
 const cert = readFileSync(__dirname + '/server.crt');
@@ -71,7 +71,7 @@ async function main() {
     });
 
     await server.listen({
-        requestCert: true,
+        requestCert: false,
         rejectUnauthorized: false,
         clientHelloHandler,
     });
@@ -81,10 +81,10 @@ async function main() {
         port: server.endpoints[0].address.port,
         servername,
     });
-    req.on('sessionTicket', () => clientLog('session ticket'));
+    req.on('sessionTicket', () => clientLog('received session ticket'));
     req.on('secure', () => clientLog('SECURE!!'));
     req.on('close', () => {
-        clientLog('code:%d family:%d', req.closeCode.code, req.closeCode.family);
+        clientLog('CLOSED: code:%d family:%d', req.closeCode.code, req.closeCode.family);
     });
 }
 

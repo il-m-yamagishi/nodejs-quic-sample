@@ -59,11 +59,11 @@ async function connectClient() {
             key,
             cert,
             ca,
-            // requestCert: true,
+            requestCert: true,
             alpn,
             servername,
         },
-        // validateAddress: true,
+        validateAddress: true,
     });
     clientSocket.on('error', (err) => console.error(`CLIENT: socket error`, err));
     clientSocket.on('sessionError', (err, session) => console.error(`CLIENT: session error`, err, session));

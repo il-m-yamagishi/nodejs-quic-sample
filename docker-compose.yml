@@ -9,7 +9,7 @@ services:
         networks:
             - nodejs
         working_dir: /home/node/app
-        command: node sample2-server.js
+        command: node sample3.js
     node-client:
         build: .
         ports:
